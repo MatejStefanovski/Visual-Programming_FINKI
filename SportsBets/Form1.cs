@@ -12,6 +12,8 @@ namespace SportsBets
 {
     public partial class Form1 : Form
     {
+        public decimal TotalCoef { get; set; } = 1;
+        public decimal Profit { get; set; } = 1;
         public Form1()
         {
             InitializeComponent();
@@ -102,8 +104,73 @@ namespace SportsBets
                 listBox3.Items.Add(gameForTicket);
                 listBox2.ClearSelected();
                 textBox2.Clear();
+                updateMoneyData();
+                /*textBox3.Text = recalculateCoeffs().ToString();
+                textBox4.Text = (recalculateCoeffs() * numericUpDown4.Value).ToString();*/
             }
+        }
+
+        private decimal recalculateCoeffs()
+        {
+            decimal product = 1M;
+            for (int i = 0; i < listBox3.Items.Count; i++)
+            {
+                GameForTicket game = listBox3.Items[i] as GameForTicket;
+                int tip = game.tip;
+                Game g = game.Game;
+                if (tip == 0)
+                {
+                    product *= g.Coef1;
+                }
+                else if (tip == 1)
+                {
+                    product *= g.CoefX;
+                }
+                else
+                {
+                    product *= g.Coef2;
+                }
+            }
+            return product;
+        }
+
+        private void updateMoneyData()
+        {
+            TotalCoef = recalculateCoeffs();
+            Profit = TotalCoef*numericUpDown4.Value;
+            textBox3.Text = TotalCoef.ToString();
+            textBox4.Text = Profit.ToString();
+        }
+
+        private void listBox3_SizeChanged(object sender, EventArgs e)
+        {
+            textBox3.Text = recalculateCoeffs().ToString();
+            
+        }
+
+        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            //textBox4.Text = (recalculateCoeffs() * numericUpDown4.Value).ToString();
+            updateMoneyData();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            List<GameForTicket> games = new List<GameForTicket>();
+            for (int i = 0; i < listBox3.Items.Count; i++) {
+                games.Add(listBox3.Items[i] as GameForTicket);
+            }
+            Livce livce = new Livce(games, numericUpDown4.Value, TotalCoef, Profit);
+          DialogResult result = livce.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                listBox1.Items.Add(livce);
+            }
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
-

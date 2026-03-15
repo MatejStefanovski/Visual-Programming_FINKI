@@ -267,8 +267,9 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(231, 36);
             this.button4.TabIndex = 4;
-            this.button4.Text = "Уплати";
+            this.button4.Text = "Печати";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // numericUpDown4
             // 
@@ -276,16 +277,20 @@
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(231, 22);
             this.numericUpDown4.TabIndex = 3;
+            this.numericUpDown4.ValueChanged += new System.EventHandler(this.numericUpDown4_ValueChanged);
             // 
             // textBox4
             // 
+            this.textBox4.Enabled = false;
             this.textBox4.Location = new System.Drawing.Point(10, 152);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(231, 22);
             this.textBox4.TabIndex = 2;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBox3
             // 
+            this.textBox3.Enabled = false;
             this.textBox3.Location = new System.Drawing.Point(10, 54);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(231, 22);
@@ -395,6 +400,7 @@
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(247, 292);
             this.listBox3.TabIndex = 6;
+            this.listBox3.SizeChanged += new System.EventHandler(this.listBox3_SizeChanged);
             // 
             // label1
             // 
