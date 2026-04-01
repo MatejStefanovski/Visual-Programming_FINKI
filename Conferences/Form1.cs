@@ -89,7 +89,11 @@ namespace Conferences
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ShowConf(int.Parse(comboBox1.Text));
+            if (!int.TryParse(comboBox1.Text, out int text))
+            {
+                return;
+            }
+            ShowConf(text);
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
